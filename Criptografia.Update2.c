@@ -1,3 +1,15 @@
+/* 
+Neste programa, o usu√°rio cria uma senha que atende a uma s√©rie de requisitos para proteger um texto. 
+Em seguida, o texto √© cifrado duas vezes, utilizando, respectivamente, os m√©todos de cifra de transposi√ß√£o e cifra de substitui√ß√£o.
+Para decifrar o texto, o usu√°rio precisa digitar a senha criada anteriormente, tendo direito a duas tentativas.
+1 - O usu√°rio cria uma senha (atendendo uma s√©rie de requisitos).
+2 - Escreve um texto.
+3 - O texto √© cifrado pelo m√©todo de transposi√ß√£o.
+4 - O texto (j√° cifrado) √© cifrado novamente pelo m√©todo de substitui√ß√£o.
+5 - Para decifrar o texto, o usu√°rio precisa digitar a senha criada anteriormente.
+6 - Caso o usu√°rio erre a senha, ele tem mais uma tentativa.
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,7 +19,7 @@
 #define MAXPALAVRA 20
 
 
-// FunÁ„o para decifrar a mensagem
+// Fun√ß√£o para decifrar a mensagem
 void decifraMensagem(char string[], int len) {
     int i, j, k = 0, raiz;
     char matriz[MAX][MAX];
@@ -61,7 +73,7 @@ void decifraMensagem(char string[], int len) {
 
     string[j] = '\0';
 }
-// FunÁ„o para embaralhar os valores da tabela (Fisher-Yates Shuffle)
+// Fun√ß√£o para embaralhar os valores da tabela (Fisher-Yates Shuffle)
 void shuffle(char table[]) {
     for (int i = MAX - 1; i > 0; i--) {
         int j = rand() % (i + 1);
@@ -73,7 +85,7 @@ void shuffle(char table[]) {
 
 int main()
 {
-    // Inicio da criaÁ„o da senha
+    // Inicio da cria√ß√£o da senha
     char senha[MAXSENHA];
     int cont = 0, lenSENHA, tamanho = 1, i, n;
 
@@ -83,7 +95,7 @@ int main()
     printf("Deve conter pelo menos uma letra minuscula\n");
     printf("Deve conter pelo menos um numero\n");
     printf("Deve conter pelo menos um dos seguintes simbolos: !, ?, #, @, $\n");
-    printf("Nao pode ser um palindromo, i.e., revertendo-se os caracteres n„o podemos obter a mesma senha\n");
+    printf("Nao pode ser um palindromo, i.e., revertendo-se os caracteres n√£o podemos obter a mesma senha\n");
     printf("Nao pode conter nenhuma palavra reservada do dicionario\n");
     printf("==================================================================================================\n");
 
@@ -106,7 +118,7 @@ int main()
     printf("Deve conter pelo menos uma letra minuscula\n");
     printf("Deve conter pelo menos um numero\n");
     printf("Deve conter pelo menos um dos seguintes simbolos: !, ?, #, @, $\n");
-    printf("Nao pode ser um palindromo, i.e., revertendo-se os caracteres n„o podemos obter a mesma senha\n");
+    printf("Nao pode ser um palindromo, i.e., revertendo-se os caracteres n√£o podemos obter a mesma senha\n");
     printf("Nao pode conter nenhuma palavra reservada do dicionario\n");
     printf("==================================================================================================\n");
 
@@ -135,7 +147,7 @@ int main()
     palindromo = 1;
     for (i = 0; i < lenSENHA / 2; i++) {
         if (senha[i] != senha[lenSENHA - i - 1]) {
-            palindromo = 0; // N„o È palÌndromo
+            palindromo = 0; // N√£o √© pal√≠ndromo
             break;
         }
     }
@@ -162,7 +174,7 @@ int main()
         if (!verifica_dicionario) printf("-A senha contem pelo menos uma palavra reservada do dicionario.");
         return 1;
     }
-    // Fim da criaÁ„o da senha
+    // Fim da cria√ß√£o da senha
 
     char string[1024], matriz[MAX][MAX];
     int m, raiz;
@@ -171,7 +183,7 @@ int main()
     fgets(string, MAX, stdin);
     system("cls");
 
-    // Cifragem do texto usando o mÈtodo de cifra de transposiÁ„o
+    // Cifragem do texto usando o m√©todo de cifra de transposi√ß√£o
     int len = strlen(string);
     if (string[len - 1] == '\n'){
         string[len - 1] = '\0';
@@ -207,7 +219,7 @@ int main()
 
     string[k] = '\0';
 
-    // Segunda cifragem do texto usando o mÈtodo de cifra de substituiÁ„o
+    // Segunda cifragem do texto usando o m√©todo de cifra de substitui√ß√£o
     char substitutionTable[MAX], inverseTable[MAX];
 
     srand(time(NULL));
@@ -217,12 +229,12 @@ int main()
     }
     shuffle(substitutionTable); // Embaralha os valores da tabela
 
-    // Cria a tabela inversa para decodificaÁ„o
+    // Cria a tabela inversa para decodifica√ß√£o
     for (i = 0; i < MAX; i++) {
         inverseTable[(unsigned char)substitutionTable[i]] = (char)i;
     }
 
-    // Substitui os caracteres da string com base na tabela de substituiÁ„o
+    // Substitui os caracteres da string com base na tabela de substitui√ß√£o
     for (i = 0; i < strlen(string); i++) {
         string[i] = substitutionTable[(unsigned char)string[i]];
     }
@@ -250,7 +262,7 @@ int main()
     } else {
         system("cls");
         printf("Mensagem cifrada: %s\n", string);
-        printf("Senha errada. Mais uma tentativa disponÌvel \n");
+        printf("Senha errada. Mais uma tentativa dispon√≠vel \n");
         printf("\nDigite a senha: ");
         fgets(senha2, MAXSENHA, stdin);
 

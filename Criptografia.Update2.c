@@ -2,7 +2,7 @@
 Neste programa, o usuário cria uma senha que atende a uma série de requisitos para proteger um texto. 
 Em seguida, o texto é cifrado duas vezes, utilizando, respectivamente, os métodos de cifra de transposição e cifra de substituição.
 Para decifrar o texto, o usuário precisa digitar a senha criada anteriormente, tendo direito a duas tentativas.
-1 - O usuário cria uma senha (atendendo uma série de requisitos).
+1 - O usuário cria uma senha (atendendo a uma série de requisitos).
 2 - Escreve um texto.
 3 - O texto é cifrado pelo método de transposição.
 4 - O texto (já cifrado) é cifrado novamente pelo método de substituição.

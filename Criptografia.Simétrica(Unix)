@@ -1,3 +1,4 @@
+
 /* 
 Neste programa, o usuário cria uma senha que atende a uma série de requisitos para proteger um texto. 
 Em seguida, o texto é cifrado duas vezes, utilizando, respectivamente, os métodos de cifra de transposição e cifra de substituição.
@@ -14,74 +15,15 @@ Para decifrar o texto, o usuário precisa digitar a senha criada anteriormente, 
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+
 #define MAX 256
 #define MAXSENHA 100
 #define MAXPALAVRA 20
 
-
 // Função para decifrar a mensagem
-void decifraMensagem(char string[], int len) {
-    int i, j, k = 0, raiz;
-    char matriz[MAX][MAX];
-    len = strlen(string);
-    if (string[len - 1] == '\n'){
-        string[len - 1] = '\0';
-        len--;
-    }
-
-    for (raiz = 1; raiz * raiz < len; raiz++);
-
-    k = 0;
-    for(i = 0; i < raiz; i++){
-        for(j = 0; j < raiz ; j++){
-            if(k < len && string[k] != '\0'){
-                matriz[i][j] = (string[k] == ' ') ? '*' : string[k];
-                k++;
-            } else {
-                matriz[i][j] = ' ';
-            }
-        }
-    }
-
-    k = 0;
-    for(i = 0; i < raiz; i++){
-        for(j = 0; j < raiz ; j++){
-            if(k < len && string[k] != '\0'){
-                string[k] = (matriz[j][i] == '*') ? ' ' : matriz[j][i];
-                k++;
-            } else {
-                string[k] = ' ';
-            }
-        }
-    }
-
-    j = 0;
-    int espaco = 0;
-    for(i = 0; i < len; i++){
-        if(string[i] != ' '){
-            espaco = 0;
-            string[j++] = string[i];
-        } else if(!espaco){
-            string[j++] = ' ';
-            espaco = 1;
-        }
-    }
-
-    if(j > 0 && string[j - 1] == ' '){
-        j--;
-    }
-
-    string[j] = '\0';
-}
+void decifraMensagem(char string[], int len);
 // Função para embaralhar os valores da tabela (Fisher-Yates Shuffle)
-void shuffle(char table[]) {
-    for (int i = MAX - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        char temp = table[i];
-        table[i] = table[j];
-        table[j] = temp;
-    }
-}
+void shuffle(char table[]);
 
 int main()
 {
@@ -285,4 +227,69 @@ int main()
     }
 
     return 0;
+}
+
+// Função para decifrar a mensagem
+void decifraMensagem(char string[], int len) {
+    int i, j, k = 0, raiz;
+    char matriz[MAX][MAX];
+    len = strlen(string);
+    if (string[len - 1] == '\n'){
+        string[len - 1] = '\0';
+        len--;
+    }
+
+    for (raiz = 1; raiz * raiz < len; raiz++);
+
+    k = 0;
+    for(i = 0; i < raiz; i++){
+        for(j = 0; j < raiz ; j++){
+            if(k < len && string[k] != '\0'){
+                matriz[i][j] = (string[k] == ' ') ? '*' : string[k];
+                k++;
+            } else {
+                matriz[i][j] = ' ';
+            }
+        }
+    }
+
+    k = 0;
+    for(i = 0; i < raiz; i++){
+        for(j = 0; j < raiz ; j++){
+            if(k < len && string[k] != '\0'){
+                string[k] = (matriz[j][i] == '*') ? ' ' : matriz[j][i];
+                k++;
+            } else {
+                string[k] = ' ';
+            }
+        }
+    }
+
+    j = 0;
+    int espaco = 0;
+    for(i = 0; i < len; i++){
+        if(string[i] != ' '){
+            espaco = 0;
+            string[j++] = string[i];
+        } else if(!espaco){
+            string[j++] = ' ';
+            espaco = 1;
+        }
+    }
+
+    if(j > 0 && string[j - 1] == ' '){
+        j--;
+    }
+
+    string[j] = '\0';
+}
+
+// Função para embaralhar os valores da tabela (Fisher-Yates Shuffle)
+void shuffle(char table[]) {
+    for (int i = MAX - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        char temp = table[i];
+        table[i] = table[j];
+        table[j] = temp;
+    }
 }
